@@ -184,10 +184,36 @@ class Sequential{
         this.l = modules.length
     }
 
-    sgd(X, y){
+    // X, Y are actual datasets.  
+    // X would be in format of (D, N)
+    // Y would be in the format of (d, N) 
+    sgd(X, Y){
+        var N = X.array[0].array.length 
+        var D = X.array.length
+        var d = Y.array.length
+        var index = Math.floor(Math.random()*N)
 
+        // this would be the array holding X[index]
+        var temp1 = []
 
+        for(var i=0; i<D; ++i){
+            temp1.push([X.array[i].array.getelement(index)])
+        }
 
+        // this would be holding Y[index]
+        var temp2 = []
+
+        for(var j=0; j<d; ++j){
+            temp2.push([Y.array[j].array.getelement(index)])
+        }
+
+        var Xt = JSarray(temp1)
+        var Yt = JSarray(temp2)
+        
+        var output = this.forward(Xt)
+        var loss = this.loss(Yt, output)
+        this.backward(loss)
+        this.sgd_step(lrate)
     }
 
     // forward pass
