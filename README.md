@@ -31,6 +31,32 @@ nn.addLayer(new Layer(3, 1, ActivationFunction.SIGMOID));
 nn.compile();
 ```
 
+### Training a Model
+
+```javascript
+const trainingData = [
+  { input: [0, 0], output: [0] },
+  { input: [0, 1], output: [1] },
+  { input: [1, 0], output: [1] },
+  { input: [1, 1], output: [0] },
+];
+
+const options = {
+  epochs: 10000,
+  learningRate: 0.1,
+};
+
+nn.train(trainingData, options);
+```
+
+### Making Predictions
+
+```javascript
+const input = [0, 1];
+const prediction = nn.predict(input);
+console.log(prediction); // [0.987]
+```
+
 ### Documentation
 
 More Documentation would be added soon :)
